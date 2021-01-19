@@ -8,7 +8,7 @@
     > easy to install and upgrade, which indirectly improves the applicability of Linux. 
 
 ## Usage
-    ```
+```
     mkdir -pv {BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS}
-    ```
+```
     

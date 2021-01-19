@@ -5,7 +5,7 @@
 | module | description | org |
 |:-- |:-- |:--|
 | epel | Extra Packages for Enterprise Linux (EPEL) | https://fedoraproject.org/wiki/EPEL |
-| rpm | Redhat Package Manager |
+| rpm | Redhat Package Manager | http://rpm.org/ |
 
 ---
 
