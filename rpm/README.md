@@ -8,7 +8,36 @@
     > easy to install and upgrade, which indirectly improves the applicability of Linux. 
 
 ## Usage
-```
-    mkdir -pv {BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS}
-```
+```shell
+    yum install rpm-build rpmdevtools
+    rpmdev-setuptree
     
+    |__ BUILD
+    |__ RPMS
+    |__ SOURCES
+    |__ SPECS
+    |__ SRPMS
+
+    rpmdev-newspec
+    |
+    |__ newpackage.spec
+
+```
+   
+# Macro Analogues of Autoconf Variables
+
+    Several macro definitions provided by the default rpm macro set have uses in packaging similar to the 
+    autoconf variables that are used in building packages:
+
+| name | value |
+|:-- |:-- |
+| %\_prefix | /usr |
+| %\_exec\_prefix | %{\_prefix} |
+| %\_bindir | %{\_exec\_prefix}/bin |
+| %\_sbindir | %{\_exec\_prefix}/sbin |
+| %\_datadir | %{\_prefix}/share |
+| %\_sysconfdir | %{\_prefix}/etc |
+| %\_libdir | %{\_exec\_prefix}/lib |
+| %\_includedir | %{\_prefix}/include |
+
+
