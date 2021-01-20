@@ -1,7 +1,7 @@
 
 # Options
-Name:           xgodbc
-Version:        3.5.0
+Name:           demo 
+Version:        0.0.1
 Release:        1%{?dist}
 Summary:        A xugu DB driver supporting ODBC standard interface.
 
