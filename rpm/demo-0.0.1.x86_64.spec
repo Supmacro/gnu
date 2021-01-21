@@ -3,10 +3,10 @@
 Name:           demo 
 Version:        0.0.1
 Release:        1%{?dist}
-Summary:        A xugu DB driver supporting ODBC standard interface.
+Summary:        This is a spec file for learning how to make RPM 
 
 License:        NONE 
-URL:            http://www.xugucn.com
+URL:            http://www.unixodbc.org/ 
 Source0:        %{name}-%{version}.tar.gz 
 
 # If the package is not architecture dependent, for example, if written entirely 
@@ -40,6 +40,9 @@ execute SQL statements, and retrieve results.
 #   %setup           /* Do not add any options, only open the package */
 #   %setup -q        /* In quiet mode with minimal output, 'tar -xof *.tar.gz' */
 #   %setup -a number /* Unzip only the source code of the given number */ 
+#   %setup -n %{dir} /* Unzip the package to %{dir} */
+#   %setup -c        /* Generate %{name}-%{version} directory before decompression */
+#
 %setup -q
 
 
@@ -48,7 +51,11 @@ execute SQL statements, and retrieve results.
 
 %install
 mkdir -p %{buildroot}%{_bindir}
+mkdir -p %{buildroot}%{_sysconfdir}/demo
+
 install -m 0755 lib%{name}.so %{buildroot}%{_bindir}/lib%{name}.so
+install -m 0644 demo/odbc.temp %{buildroot}%{_sysconfdir}/demo
+install -m 0644 demo/odbcinst.temp %{buildroot}%{_sysconfdir}/demo
 
 #rm -rf $RPM_BUILD_ROOT
 #%make_install
@@ -56,6 +63,8 @@ install -m 0755 lib%{name}.so %{buildroot}%{_bindir}/lib%{name}.so
 
 %files
 %{_bindir}/lib%{name}.so
+%config %{_sysconfdir}/demo/odbcinst.temp
+%config %{_sysconfdir}/demo/odbc.temp
 #%doc
 
 

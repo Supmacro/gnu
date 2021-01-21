@@ -41,3 +41,8 @@
 | %\_includedir | %{\_prefix}/include |
 
 
+# Build RPM
+```
+rpmbuild -bb --sign *.spec
+/* rpm --checksig *.rpm */
+```
