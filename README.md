@@ -1,6 +1,6 @@
 
 
-# root
+# GNU
 
 | module | description | org |
 |:-- |:-- |:--|
@@ -9,4 +9,14 @@
 
 ---
 
+# Note
+
+| module | description | web station |
+|:--|:--|:--|
+| aio | Asynchronous IO | \ |
+| bash-shell | shell scripting language | \ |
+| IPC | IPC communication | \ |
+| local | IPC communication | \ |
+| sort | Sorting Algorithm | \ |
+| uid | Sorting Algorithm | \ |
 
