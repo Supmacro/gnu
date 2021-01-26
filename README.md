@@ -19,4 +19,4 @@
 | local | IPC communication | \ |
 | sort | Sorting Algorithm | \ |
 | uid | Sorting Algorithm | \ |
-
+| nginx | web reverse proxy server | https://www.nginx.cn/doc/standard/httpcore.html |
