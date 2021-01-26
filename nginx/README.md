@@ -3,7 +3,7 @@
 ```
 location [ = | ~ | ~* | ^~ | @ ] /uri/ {...}
 ```
-There are two types of matching strings: literal string and regular expression, where '~' and '~\*' 
+There are two types of matching strings: literal string and regular expression, where '\~' and '\~\*' 
 are used for regular expressions, and other prefixes and no prefixes are used for normal strings.
 
 ## rule
