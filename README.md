@@ -22,3 +22,4 @@
 | nginx | web reverse proxy server | https://www.nginx.cn/doc/standard/httpcore.html |
 | libcurl | the multiprotocol file transfer library | https://curl.se/libcurl/ |
 | ftp | File transfer protocol | \ |
+| float | Shift store | \ |
