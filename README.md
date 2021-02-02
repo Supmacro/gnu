@@ -23,3 +23,4 @@
 | libcurl | the multiprotocol file transfer library | https://curl.se/libcurl/ |
 | ftp | File transfer protocol | \ |
 | float | Shift store | \ |
+| deb | deb is the installation package under Unix/Linux system | \ |
