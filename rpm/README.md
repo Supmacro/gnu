@@ -46,3 +46,15 @@
 rpmbuild -bb --sign *.spec
 /* rpm --checksig *.rpm */
 ```
+
+# Qusetion
+- Found installed (but unpackaged) files 
+`%define _unpackaged_files_terminate_build 0`
+
+- Ignore rpath check
+```
+vim ~/.rpmmacros
+#%__arch_install_post /usr/lib/rpm/check-rpaths /usr/lib/rpm/check-buildroot
+```
+
+

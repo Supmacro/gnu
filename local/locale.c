@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
     lc_print_locale(LC_MONETARY, ""); 
     lc_print_locale(LC_NUMERIC, ""); 
     lc_print_locale(LC_TIME, ""); 
-    printf("%7s:%s\n", "", zh_CH);
+    printf("%7s:%s\n", "", "zh_CH");
 
     fprintf(stdout, "\"NULL\"\n");
     lc_print_locale(LC_ALL, NULL); 
