@@ -16,7 +16,7 @@
 | command | syntax | description |
 | :-- | :-- | :-- |
 | dpkg | dpkg -i | install |
-| dpkg | dpkg -L | list files 'owned' by package(s) |
+| dpkg | dpkg -L | view where the package is installed |
 | dpkg | dpkg -r | remove package (keep configuration) |
 | dpkg | dpkg -P | remove package (Do not keep configuration) | 
 | dpkg | dpkg --unpack | Unpack the contents of the deb package |
