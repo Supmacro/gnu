@@ -15,12 +15,14 @@
 |:--|:--|:--|
 | aio | Asynchronous IO | \ |
 | bash-shell | shell scripting language | \ |
+| deb | debian | https://www.debian.org/doc/manuals/ |
+| float | Shift store | \ |
+| ftp | File transfer protocol | \ |
+| git | Version control | http://marklodato.github.io/visual-git-guide/index-zh-cn.html |
 | IPC | IPC communication | \ |
+| libcurl | the multiprotocol file transfer library | https://curl.se/libcurl/ |
 | local | IPC communication | \ |
 | sort | Sorting Algorithm | \ |
 | uid | Sorting Algorithm | \ |
 | nginx | web reverse proxy server | https://www.nginx.cn/doc/standard/httpcore.html |
-| libcurl | the multiprotocol file transfer library | https://curl.se/libcurl/ |
-| ftp | File transfer protocol | \ |
-| float | Shift store | \ |
-| deb | deb is the installation package under Unix/Linux system | \ |
+| vim | Text editor | \ |
