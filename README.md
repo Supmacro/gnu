@@ -26,3 +26,4 @@
 | uid | Sorting Algorithm | \ |
 | nginx | web reverse proxy server | https://www.nginx.cn/doc/standard/httpcore.html |
 | vim | Text editor | \ |
+| python | python ecosystem | \ |

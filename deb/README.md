@@ -21,6 +21,13 @@
 | dpkg | dpkg -P | remove package (Do not keep configuration) | 
 | dpkg | dpkg --unpack | Unpack the contents of the deb package |
 
+
+## .bashrc
+```
+DEBEMAIL="supmacro@foxmail.com"
+DEBFULLNAME="WP Zhou"
+```
+
 # Debian
 * control
 ```
