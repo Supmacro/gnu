@@ -19,5 +19,5 @@
 |:-- |:-- | :-- |
 | click | command tool |  https://click.palletsprojects.com/en/7.x/quickstart/#virtualenv |
 | setuptools | package manager tools | https://www.jianshu.com/p/ea9973091fdf |
-
+| pdb | debug tools | ... |
 
