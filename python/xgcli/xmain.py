@@ -65,27 +65,33 @@ class XCli(object):
 
 @click.command()
 @click.option('-h', '--host', help='Host address of the database. In addition,'
-  " the host IP address can also be specified through 'XHOST'"
-  " environment variables and configuration files.", envvar='XHOST')
+    " the host IP address can also be specified through 'XHOST'"
+    " environment variables and configuration files.", envvar='XHOST')
 @click.option('-p', '--port', help='Port number to use for connection. In addition,'
-  " the port number can also be specified by means of 'XHOST'"
-  ' environment variables and configuration files.', envvar='XPORT', type=int)
+    " the port number can also be specified by means of 'XHOST'"
+    ' environment variables and configuration files.', envvar='XPORT', type=int)
 
 @click.option('-u', '--user'    , help='User name to connect to the database.')
 @click.option('-d', '--database', help='The name of the database to be connected.')
 @click.option('-w', '--passwd'  , help='Password to connect to the database.')
 @click.option('-v', '--version' , help='Output xgcli\'s version.', is_flag=True)
 @click.option('--ssh/--no-ssh'  , help='Enable secure encrypted connection,'
-  ' this feature is currently not supported.', default=False)
+    ' this feature is currently not supported.', default=False)
 
 @click.option('--charset', help='Character set for xugusql session.'
-  ' UTF-8 character set is used by default.', default='utf8')
+    ' UTF-8 character set is used by default.', default='utf8')
 def client(host, port, database, user, passwd, ssh, version, charset):
     """A xugusql terminal client with syntax highlighting and auto-completion.
 
     \b    
     Examples:
         - xgcli -h '127.0.0.1' -p 5138 -d 'SYSTEM' -u 'SYSDBA'
+         ____ ____ ________  ________ _____ _____
+        |    |    /        |/        |     |     |
+         \       /    |____|    _____|     |_____|
+         /       \    |_   |         |     |     |
+        |____|____\________|\________|_____|_____|
+  
     """
     cli = XCli(host=host, port=port, database=database, user=user, 
                passwd=passwd, charset=charset)
