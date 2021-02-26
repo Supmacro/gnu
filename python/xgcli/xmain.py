@@ -17,7 +17,7 @@ class XCli(object):
         'charset': None,
 
         'login' : {
-            'config' : None,
+            'cnf' : None,
             'user' : None,
             'home' : None,
         }
@@ -30,7 +30,7 @@ class XCli(object):
         '''XCli's constructor'''
         self.options['login']['user'] = getpass.getuser()
         self.options['login']['home'] = os.environ.get('HOME')
-        self.options['login']['config'] = '/home/xgcli/configrc' 
+        self.options['login']['cnf'] = os.path.expanduser('~/.xgclirc') 
 
         self.options['host'] = host
         self.options['port'] = port
@@ -38,6 +38,8 @@ class XCli(object):
         self.options['user'] = user
         self.options['password'] = passwd
         self.options['charset'] = charset
+
+        self.completer = 
 
     def z_version(self, isecho):
         ''' Need to print the version number of the current program? '''
@@ -51,7 +53,7 @@ class XCli(object):
            actively read the content in the ~/.xgclirc configuration 
            file.
         '''
-        cobj = ConfigObj(self.options['login']['config'], 
+        cobj = ConfigObj(self.options['login']['cnf'], 
                 list_values=True, interpolation=False, encoding='UTF-8')
         cobjks = cobj.keys()
         optsks = self.options.keys()
@@ -118,7 +120,7 @@ def client(host, port, database, user, passwd, ssh, version, charset):
                 continue
             cli.options[key] = click.prompt(pmp[key], type=str)
 
-    print(cli.options)
+    print(cli.options['login']['cnf'])
 
 if __name__ == '__main__':
     client()
