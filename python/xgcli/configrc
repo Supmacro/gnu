@@ -1,0 +1,8 @@
+# xugusql
+host = 192.168.2.40
+port =
+
+# connection information
+database = SYSTEM
+user =
+password =
