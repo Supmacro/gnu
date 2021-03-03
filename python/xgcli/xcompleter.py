@@ -1,7 +1,7 @@
 
 from prompt_toolkit.completion import Completer, Completion
 
-import xparser
+from .xparser import plast_word 
 
 class SQLCompleter(Completer):
     keywords = ['ABORT', 'ABOVE', 'ABSOLUTE', 'ACCESS', 'ACCOUNT', 'ACTION', 'ADD',
@@ -107,7 +107,7 @@ class SQLCompleter(Completer):
             Given the user's input text and a collection of available completions,
             find completions matching the last word of the text.
         """
-        word = xparser.plast_word(text)
+        word = plast_word(text)
         text = word.lower()        
 
         completions = []
