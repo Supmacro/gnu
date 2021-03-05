@@ -26,12 +26,14 @@ programming languages.
 %install
 mkdir -p %{buildroot}%{_libdir}
 install -m 0755 lib%{name}.so %{buildroot}%{_libdir}
+install -m 0644 xugusql.h %{buildroot}%{_libdir}
 
 %files
 %{_libdir}/lib%{name}.so
+%{_libdir}/xugusql.h
 
 
 %changelog
-* Sun Feb 7 2021 WP Zhou <supmacro@foxmail.com> - 2.0.0 
+* Fri Mar 5 2021 WP Zhou <supmacro@foxmail.com> - 2.0.0 
 - xugusql installation package.
 - Xugu database C/C++ programming language general interface
