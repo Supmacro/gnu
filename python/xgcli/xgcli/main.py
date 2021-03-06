@@ -58,7 +58,7 @@ class XCli(object):
         self._completer_lock = threading.Lock() 
         self.xprompt = None
         self.multi_line = False
-        self.multi_continuation = '>'
+        self.multi_continuation = '\>'
 
     def xversion(self, isecho):
         ''' Need to print the version number of the current program? '''
@@ -104,7 +104,7 @@ class XCli(object):
             except KeyboardInterrupt:
                 return
           
-            if text.lower() in ['quit', 'exit']:
+            if len(text) < 7 and ''.join(text.lower().split()) in ['quit;', 'exit;']:
                 click.secho('See you again!', fg='green')
                 sys.exit(0)
 

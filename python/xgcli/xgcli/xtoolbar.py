@@ -24,9 +24,10 @@ def xbottom_toolbar(xgcli):
             'multi_line.off': ('class:bottom-toolbar.off', '[F3] Multiline: OFF  '),
             'smart_completion.on' : ('class:bottom-toolbar.on', '[F2] Smart Completion: ON  '),
             'smart_completion.off': ('class:bottom-toolbar.off', '[F2] Smart Completion: OFF  '),
-            'delimiter': ('class:bottom-toolbar', '[\';\'] will end the line  ')
+            'delimiter': ('class:bottom-toolbar', '[\';\'] will end the line  '),
         }
 
+        xbar.append(toolbar['delimiter'])
         if xgcli.completer.with_completion:
             xbar.append(toolbar['smart_completion.on'])
         else: 
