@@ -4,18 +4,20 @@ import threading
 import sys
 import getpass
 import os
+import pygments.styles
 
-import xcompleter
-import xtoolbar
-import xsqlexer
+
+from .xcompleter import SQLCompleter
+from .xtoolbar import xbottom_toolbar, xbottom_binding, cli_multiline 
+from .xsqlexer import XgCliLexer
 
 from configobj import ConfigObj
 from prompt_toolkit.completion import DynamicCompleter
 from prompt_toolkit.shortcuts import PromptSession
-from prompt_toolkit.styles import Style
+from prompt_toolkit.styles import Style, merge_styles
 from prompt_toolkit.lexers import PygmentsLexer
 from prompt_toolkit.formatted_text import ANSI
-
+from prompt_toolkit.styles.pygments import style_from_pygments_cls
 
 class XCli(object):
     
@@ -52,9 +54,11 @@ class XCli(object):
         self.options['charset'] = charset
         self.options['name'] = 'xgcli'
 
-        self.completer = xcompleter.SQLCompleter()
+        self.completer = SQLCompleter(with_completion=True)
         self._completer_lock = threading.Lock() 
         self.xprompt = None
+        self.multi_line = False
+        self.multi_continuation = '>'
 
     def xversion(self, isecho):
         ''' Need to print the version number of the current program? '''
@@ -104,26 +108,73 @@ class XCli(object):
                 click.secho('See you again!', fg='green')
                 sys.exit(0)
 
+        def continuation(width, *_):
+            if self.multi_continuation == '':
+                pmp = ''
+            elif self.multi_continuation:
+                left = width - len(self.multi_continuation)
+                pmp = " " * max((left - 1), 0) + self.multi_continuation + " "  
+            else:
+                pmp = ""
+
+            return [('class:continuation', pmp)]
+
         print("")
         print("Welcome to use xugu database products.")
         print("Successfully connect to %s:%s %s as %s" %(self.options['host'], 
                self.options['port'], self.options['database'], self.options['user']))
         print("%s: %s" %(self.options['name'], self.version))
-        print('Home: https://www.xugucn.com')
+        print('Home: http://www.xugucn.com/')
         print("")
 
-        func = xtoolbar.xbottom_toolbar
-        xstyle = Style.from_dict({
-                    '': '#aaaaaa',
-                    'bottom-toolbar':'bg:#222222 #aaaaaa'})
+        bar = xbottom_toolbar(self)
+        binding = xbottom_binding(self)
+
+        def xstyle():
+            elem = [ 
+                    ('completion-menu.completion.current', 'bg:#ffffff #000000'),
+                    ('completion-menu.completion', 'bg:#008888 #ffffff'),
+                    ('completion-menu.meta.completion.current', 'bg:#44aaaa #000000'),
+                    ('completion-menu.meta.completion', 'bg:#448888 #ffffff'),
+                    ('completion-menu.multi-column-meta', 'bg:#aaffff #000000'),
+                    ('scrollbar.arrow', 'bg:#003333'),
+                    ('scrollbar', 'bg:#00aaaa'),
+                    ('selected', '#ffffff bg:#6666aa'),
+                    ('search', '#ffffff bg:#4444aa'),
+                    ('output.header', '#00ff5f bold'),
+                    ('output.odd-row', ''),
+                    ('output.even-row', ''),
+                    ('output.null', '#808080'),
+                    ('search.current', '#ffffff bg:#44aa44'),
+                    ('bottom-toolbar', 'bg:#222222 #aaaaaa'),
+                    ('bottom-toolbar.off', 'bg:#222222 #888888'),
+                    ('bottom-toolbar.on', 'bg:#222222 #ffffff'),
+                    ('bottom-toolbar.transaction.valid', 'bg:#222222 #00ff5f bold'),
+                    ('bottom-toolbar.transaction.failed', 'bg:#222222 #ff005f bold'),
+                    ('search-toolbar', 'noinherit bold'),
+                    ('search-toolbar.text', 'nobold'),
+                    ('system-toolbar', 'noinherit bold'),
+                    ('arg-toolbar', 'noinherit bold')]
+
+            style = pygments.styles.get_style_by_name('default')
+            override_style = Style([('bottom-toolbar', 'noreverse')])
+            
+            return merge_styles([style_from_pygments_cls(style),
+                              override_style,
+                              Style(elem)])
 
         self.xprompt = PromptSession(
                             message = self.xlogin(),
-                            lexer = PygmentsLexer(xsqlexer.XgCliLexer),
+                            lexer = PygmentsLexer(XgCliLexer),
                             completer = DynamicCompleter(lambda: self.completer),
-                            bottom_toolbar = func,
-                            style = xstyle
-        ) 
+                            bottom_toolbar = bar,
+                            style = xstyle(),
+                            prompt_continuation = continuation,
+                            key_bindings = binding,
+                            multiline = cli_multiline(self),
+                            complete_while_typing=True,
+                            include_default_pygments_style=False, 
+        )
         
         try:
             while True:

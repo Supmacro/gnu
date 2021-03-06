@@ -87,22 +87,19 @@ class SQLCompleter(Completer):
 
     functions = ['AVG', 'COUNT'] 
     
-    def __init__(self, keyword_casing='auto', smart_completion=True):
+    def __init__(self, with_completion=True, keyword_casing='auto'):
         super(self.__class__, self).__init__()
-        self.smart_completion = smart_completion
+        self.with_completion = with_completion
         self.unrepeat_words = set()
         for x in self.keywords:
             self.unrepeat_words.update(x.split())
         self.reset_completions()
 
     def reset_completions(self):
-        self.database = []
-        self.users = []
-        self.dbmeta = {'tables':{}, 'views':{}, 'functions':{}}
         self.all_completions = set(self.keywords + self.functions)
 
     @staticmethod
-    def match_word(text, words, word_case=None):
+    def match_word(text, words, word_case=None, with_completion=True):
         """
             Given the user's input text and a collection of available completions,
             find completions matching the last word of the text.
@@ -111,7 +108,7 @@ class SQLCompleter(Completer):
         text = word.lower()        
 
         completions = []
-        if word != '':
+        if with_completion and word != '':
             for x in sorted(words):
                 index = x.lower().find(text, 0, len(x))
                 if index == 0:
@@ -128,8 +125,8 @@ class SQLCompleter(Completer):
         return (Completion(c if word_case is None else smart_case(c), -len(text))
                     for a, b, c, in sorted(completions)) 
                 
- 
     def get_completions(self, document, complete_event):
         wbc = document.get_word_before_cursor(WORD=True)
-        return self.match_word(wbc, self.all_completions)
+        return self.match_word(wbc, self.all_completions, \
+                         with_completion=self.with_completion)
 
